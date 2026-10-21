@@ -1,4 +1,3 @@
-# busa3022-market-intelligence
 # Really Big Bank – Market Intelligence Analytics
 BUSA3022 Analytics Lead Case Study (Group)
 
