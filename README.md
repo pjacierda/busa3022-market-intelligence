@@ -2,23 +2,29 @@
 BUSA3022 Analytics Lead Case Study (Group)
 
 ## Goal
-Show how market activity has trended over the past 90 days and flag anything worth watching.
+Show how the Australian share market has trended over the past 90 days and flag anything worth watching.
 
 ## Data sources
-- Market index: S&P 500 (^GSPC) – Yahoo Finance, daily
-- Macro series: VIX (VIXCLS) – FRED, daily
+- Market index: S&P/ASX 200 (^AXJO) – Yahoo Finance, daily
+- Macro series: Australian Government 10-year bond yield (FCMYGBAG10) – RBA table F2.1, daily
 
 ## Data contract (data/clean/market_daily.csv)
 | Column | Meaning |
 |---|---|
-| date | US/Eastern trading date (YYYY-MM-DD) |
-| sp500_close | S&P 500 closing price |
-| sp500_volume | S&P 500 daily volume |
-| vix_close | VIX close (forward-filled where missing) |
-| vix_missing | True if VIX value was filled |
+| date | Sydney trading date (YYYY-MM-DD) |
+| asx200_close | ASX 200 closing level |
+| asx200_volume | ASX 200 daily volume |
+| bond10y_yield | 10-year bond yield, % (forward-filled where missing) |
+| bond10y_missing | True if the yield was filled rather than published |
+
+## Load the data
+```python
+import pandas as pd
+df = pd.read_csv("https://raw.githubusercontent.com/pjacierda/busa3022-market-intelligence/main/data/clean/market_daily.csv")
+```
 
 ## Team
-- Pipeline lead: 
+- Pipeline lead: Pierce
 - Curation lead: 
 - Dashboard lead: 
 - Integrator / presentation lead: 
