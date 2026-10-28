@@ -6,7 +6,7 @@ Show how the Australian share market has trended over the past 90 days and flag 
 
 ## Data sources
 - Market index: S&P/ASX 200 (^AXJO) – Yahoo Finance, daily
-- Macro series: Australian Government 10-year bond yield (FCMYGBAG10) – RBA table F2.1, daily
+- Macro series: Australian Government 10-year bond yield (FCMYGBAG10D) – RBA table F2, daily
 
 ## Data contract (data/clean/market_daily.csv)
 | Column | Meaning |
