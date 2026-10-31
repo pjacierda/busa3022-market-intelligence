@@ -1,7 +1,7 @@
 """Part 2 (data curation): calculated metrics on the clean file data/clean/market_daily.csv.
 
 Input is the team's five-column data contract, one row per ASX trading day (Sydney dates):
-    date, close, volume, bond10y, bond10y_missing
+    date, asx200_close, asx200_volume, bond10y_yield, bond10y_missing
 Plain-language definitions of every metric are in docs/metric_definitions.md and were
 written before this code. Each function matches one definition, and tests/test_metrics.py
 checks each one against rows worked by hand.
@@ -11,7 +11,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-CONTRACT = ["date", "close", "volume", "bond10y", "bond10y_missing"]
+CONTRACT = ["date", "asx200_close", "asx200_volume", "bond10y_yield", "bond10y_missing"]
 
 MA_WINDOW = 20          # M1: about one trading month
 VOL_WINDOW = 14         # M2: as suggested in the brief
@@ -42,11 +42,11 @@ def add_metrics(df: pd.DataFrame) -> pd.DataFrame:
     df = prepare(df.copy())
 
     # Building block: daily % change in the ASX 200 close.
-    df["daily_return_pct"] = df["close"].pct_change() * 100
+    df["daily_return_pct"] = df["asx200_close"].pct_change() * 100
 
     # M1: close against its 20-trading-day average (includes today, like the chart line).
-    df["close_ma20"] = df["close"].rolling(MA_WINDOW, min_periods=MA_WINDOW).mean()
-    df["close_vs_ma20_pct"] = (df["close"] / df["close_ma20"] - 1) * 100
+    df["close_ma20"] = df["asx200_close"].rolling(MA_WINDOW, min_periods=MA_WINDOW).mean()
+    df["close_vs_ma20_pct"] = (df["asx200_close"] / df["close_ma20"] - 1) * 100
 
     # M2: 14-day volatility = sample standard deviation (ddof=1) of the last 14 daily % returns.
     # Kept as "% a day", not annualised, so a non-technical reader can relate it to daily moves.
@@ -55,7 +55,7 @@ def add_metrics(df: pd.DataFrame) -> pd.DataFrame:
     # M3: 30-day correlation between ASX daily return and the daily change in the 10-year yield.
     # A carried-forward yield is not a real observation: its change would be a fake 0, so any day
     # whose yield (or the day before's) was filled is left out of the pair.
-    change = df["bond10y"].diff() * 100                       # basis points
+    change = df["bond10y_yield"].diff() * 100                       # basis points
     real = ~df["bond10y_missing"] & ~df["bond10y_missing"].shift(1, fill_value=True)
     df["yield_change_bp"] = change.where(real)
     pair_ok = df["yield_change_bp"].notna() & df["daily_return_pct"].notna()
@@ -90,4 +90,4 @@ if __name__ == "__main__":
     import sys
     args = sys.argv[1:]
     res = build(*args) if args else build()
-    print(res.tail(5)[["date", "close", "close_vs_ma20_pct", "volatility_14d", "corr_30d", "corr_30d_pairs", "rag"]])
+    print(res.tail(5)[["date", "asx200_close", "close_vs_ma20_pct", "volatility_14d", "corr_30d", "corr_30d_pairs", "rag"]])
