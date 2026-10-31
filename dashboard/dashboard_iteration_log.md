@@ -27,4 +27,4 @@ Audience for the dashboard: financially literate, non-technical users. Rows are 
 ## What worked and what did not
 
 - **Worked:** giving the AI my own work and asking it to improve it against a named audience (rows 7, 11, 12, 13, 15, 16), and testing each suggestion against clutter or against the data before keeping it.
-- **Did not work:** the first mock-up with blank space (row 7), the first set of four additions (row 8), the first spacing change (row 10), the circular validation check (row 14) and the model draft (row 17). In each case the output was judged and sent back or replaced.
+- **Did not work:** the first mock-up with blank space (row 7), the first set of four additions (row 8), the first spacing change (row 10) and the circular validation check (row 14). In each case the output was judged and sent back or replaced.
