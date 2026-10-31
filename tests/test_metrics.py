@@ -15,8 +15,8 @@ def frame(close, bond=None, missing=None):
     n = len(close)
     return pd.DataFrame({
         "date": pd.bdate_range("2026-01-05", periods=n),
-        "close": close, "volume": 1.0,
-        "bond10y": bond if bond is not None else [4.0] * n,
+        "asx200_close": close, "asx200_volume": 1.0,
+        "bond10y_yield": bond if bond is not None else [4.0] * n,
         "bond10y_missing": missing if missing is not None else [False] * n,
     })
 
