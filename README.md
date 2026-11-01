@@ -25,9 +25,9 @@ df = pd.read_csv("https://raw.githubusercontent.com/pjacierda/busa3022-market-in
 
 ## Team
 - Pipeline lead: Pierce
-- Curation lead: 
-- Dashboard lead: 
-- Integrator / presentation lead: 
+- Curation lead: Chris
+- Dashboard lead: Abdul
+- Integrator / presentation lead: Wendy
 
 ## Rules
 - Never commit API keys – use Colab Secrets
